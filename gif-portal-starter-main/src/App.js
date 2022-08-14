@@ -5,10 +5,15 @@ import { Buffer } from 'buffer'
 import twitterLogo from './assets/twitter-logo.svg';
 import './App.css';
 import idl from './idl.json'
+import kp from './keypair.json'
 
 const { SystemProgram, Keypair } = web3;
 window.Buffer = Buffer;
-let baseAccount = Keypair.generate()
+
+// let baseAccount = Keypair.generate()
+const arr =Object.values(kp._keypair.secretKey)
+const secret = new Uint8Array(arr)
+const baseAccount = Keypair.fromSecretKey(secret)
 
 const ProgramID = new PublicKey(idl.metadata.address)
 const network = clusterApiUrl('devnet')
